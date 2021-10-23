@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/javascriptNote', {
+mongoose
+  .connect("mongodb://localhost/javascriptNote", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => console.log('Connection sucessful'))
-.catch((err) => console.log(err));
+  })
+  .then(() => console.log("Connection successful"))
+  .catch((err) => console.log(err));
