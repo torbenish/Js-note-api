@@ -33,4 +33,13 @@ router.get('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const notes = await Note.find({ author: req.user._id });
+    res.json(notes);
+  } catch (error) {
+    res.json({ error }.status(500));
+  }
+});
+
 module.exports = router;
