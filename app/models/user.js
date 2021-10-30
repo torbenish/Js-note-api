@@ -1,8 +1,9 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true},
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
@@ -11,29 +12,28 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function (next) {
   if (this.isNew || this.isModified('password')) {
-    bcrypt.hash(this.password, 10,
-      (err, hashedPassword) => {
-        if (err)
-          next(err)
-        else {
-          this.password = hashedPassword;
-          next();
-        }
+    bcrypt.hash(this.password, 10, (err, hashedPassword) => {
+      if (err) {
+        next(err);
+      } else {
+        this.password = hashedPassword;
+        next();
       }
-    )
+    });
   }
 });
 
 userSchema.methods.isCorrectPassword = function (password, callback) {
-  bcrypt.compare(password, this.password, function(err, same) {
-    if(err)
+  bcrypt.compare(password, this.password, (err, same) => {
+    if (err) {
       callback(err);
-    else
+    } else {
       callback(err, same);
-  })
-}
+    }
+  });
+};
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
 
