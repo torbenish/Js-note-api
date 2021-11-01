@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 require('dotenv').config();
 
 const secret = process.env.JWT_TOKEN;
