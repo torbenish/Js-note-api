@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+const { MONGO_URL } = process.env;
 
 mongoose
-  .connect('mongodb://localhost/javascriptNote', {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
